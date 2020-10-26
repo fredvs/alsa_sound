@@ -1,5 +1,5 @@
-# alsa_beep
+# alsa_sound
 
 For Linux systems and fpc.
 
-Beeper using only libasound.so.2.
+Sounds like beeper, glibe, ... using only libasound.so.2.
