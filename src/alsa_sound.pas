@@ -82,7 +82,9 @@ procedure as_Unload();     // unload and frees the lib from memory : do not forg
 
 function ALSAbeep(frequency, duration, volume: integer; warble: Boolean; CloseLib : boolean): Boolean;
 
-function ALSAbeep: Boolean; // fixed beep at 440 HZ, mono, 100 ms, 75 % volume
+function ALSAbeep1: Boolean; // fixed beep at 660 HZ, mono, 100 ms, 75 % volume
+function ALSAbeep2: Boolean; // fixed beep at 440 HZ, mono, 100 ms, 75 % volume
+function ALSAbeep3: Boolean; // fixed beep at 220 HZ, mono, 100 ms, 75 % volume
 
 function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: integer; warble: Boolean; CloseLib : boolean): Boolean;
 
@@ -345,11 +347,20 @@ begin
    if CloseLib then as_unload;  // Unload library if param CloseLib is true
 end;
 
-function ALSAbeep: Boolean; // beep at 660 HZ, mono, 100 ms, 75 % volume
+function ALSAbeep1: Boolean; // beep at 660 HZ, mono, 100 ms, 75 % volume
 begin
 result := ALSAbeep(660, 100, 75, false, true);
 end;
 
+function ALSAbeep2: Boolean; // beep at 440 HZ, mono, 100 ms, 75 % volume
+begin
+result := ALSAbeep(440, 100, 75, false, true);
+end;
+
+function ALSAbeep3: Boolean; // beep at 220 HZ, mono, 100 ms, 75 % volume
+begin
+result := ALSAbeep(220, 100, 75, false, true);
+end;
 function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: integer; warble: Boolean; CloseLib : boolean): Boolean;
 var
   buffer: array[0..(9600*2) - 1] of byte;  // 1/5th second worth of samples @48000Hz

@@ -4,8 +4,14 @@ uses
 alsa_sound;
 
 begin
-{ function ALSAbeep: Boolean; } // beep at 660 HZ, mono, 100 ms, 75 % volume
-ALSAbeep;  
+{ function ALSAbeep1: Boolean; } // beep at 660 HZ, mono, 100 ms, 75 % volume
+ALSAbeep1;
+
+{ function ALSAbeep2: Boolean; } // beep at 440 HZ, mono, 100 ms, 75 % volume
+ALSAbeep2;  
+
+{ function ALSAbeep3: Boolean; } // beep at 220 HZ, mono, 100 ms, 75 % volume
+ALSAbeep3;  
 
 { function ALSAglide(StartFreq, EndFreq, Duration, Volume: integer;
   CloseLib : boolean): Boolean; }

@@ -686,22 +686,27 @@ findhistory=8
  sort
  uses
 findoptions=1
-editpos=3
- 0,-1073741823
- 0,347
+editpos=4
  0,0
+ 0,79
+ 0,13
+ 0,-1073741823
 bookmarks0=0
 bookmarks1=0
 bookmarks2=0
-sourcefiles=3
+bookmarks3=0
+sourcefiles=4
  ${PROJECTDIR}/alsa_sound_test.pas
  ${PROJECTDIR}/alsa_sound.pas
  ${PROJECTDIR}/alsa_sound_test.pas
-relpaths=3
+ ${PROJECTDIR}/alsa_sound_test.pas
+relpaths=4
  alsa_sound_test.pas
  alsa_sound.pas
  alsa_sound_test.pas
-ismoduletexts=3
+ alsa_sound_test.pas
+ismoduletexts=4
+ 0
  0
  0
  0
@@ -711,7 +716,7 @@ visiblemodules=0
 nomenumodules=0
 [sourcefo.files_tab]
 firsttab=0
-index=1
+index=0
 [layout]
 windowlayout=573
  [mainfo.basedock]
@@ -1188,11 +1193,11 @@ windowlayout=573
  nx=0
  ny=0
  ncx=1333
- ncy=21
+ ncy=17
  x=0
  y=0
  cx=1333
- cy=19
+ cy=15
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1202,10 +1207,10 @@ windowlayout=573
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
- value=/home/fred/alsa_sound/src/alsa_sound.pas
+ value=/home/fred/alsa_sound/src/alsa_sound_test.pas
  history=20
-  /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/alsa_sound/src/alsa_sound_test.pas
+  /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/alsa_sound_stereo/src/alsa_sound_test.pas
   /home/fred/alsa_beep/alsa_beep.pas
   /home/fred/bgrabitmap/bgradefaultbitmap.pas
@@ -1246,7 +1251,7 @@ windowlayout=573
  rcy=0
  [sourcefo.files_tab]
  firsttab=0
- index=1
+ index=0
  [confideufo.fontname]
  value=stf_default
  [confideufo.usedefaulteditoroptions]
