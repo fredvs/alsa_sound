@@ -687,8 +687,8 @@ findhistory=8
  uses
 findoptions=1
 editpos=2
- 67,6
- 0,85
+ 0,-1073741823
+ 0,479
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
@@ -706,9 +706,9 @@ visiblemodules=0
 nomenumodules=0
 [sourcefo.files_tab]
 firsttab=0
-index=0
+index=1
 [layout]
-windowlayout=603
+windowlayout=573
  [mainfo.basedock]
  splitdir=2
  useroptions=268450944
@@ -748,7 +748,7 @@ windowlayout=603
  rcy=0
  wsize=0
  active=0
- visible=1
+ visible=0
  [threadsfo]
  splitdir=0
  useroptions=268451945
@@ -1183,11 +1183,11 @@ windowlayout=603
  nx=0
  ny=0
  ncx=1333
- ncy=31
+ ncy=27
  x=0
  y=0
  cx=1333
- cy=29
+ cy=25
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1198,7 +1198,9 @@ windowlayout=603
  value=Pascal
  [debuggerfo.file_history]
  value=/home/fred/alsa_sound/src/alsa_sound_test.pas
- history=50
+ history=20
+  /home/fred/alsa_sound/src/alsa_sound.pas
+  /home/fred/alsa_sound/src/alsa_sound_test.pas
   /home/fred/alsa_sound_stereo/src/alsa_sound_test.pas
   /home/fred/alsa_beep/alsa_beep.pas
   /home/fred/bgrabitmap/bgradefaultbitmap.pas
@@ -1217,40 +1219,8 @@ windowlayout=603
   /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/main.pas
   /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/opengl.pas
   /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/openglwidget.pas
-  /home/fred/mseide-msegui/lib/common/kernel/msegui.pas
-  /home/fred/mseide-msegui/apps/ide/main.pas
-  /home/fred/mseide-msegui/lib/common/kernel/mseconsts.pas
-  /home/fred/uos/src/uos.pas
-  /home/fred/uos/src/uos.lpk
-  /home/fred/uos/readme.md
-  /home/fred/ideu/src/componentpaletteform.pas
-  /home/fred/ideu/src/confideu.pas
-  /home/fred/ideu/src/confmsegui.pas
-  /home/fred/ideu/src/conffpgui.pas
-  /home/fred/ideu/src/confdebugger.pas
-  /home/fred/ideu/src/confcompiler.pas
-  /home/fred/ideu/src/dialogfiles.pas
-  /home/fred/ideu/src/aboutform_mfm.pas
-  /home/fred/mseide-msegui/lib/common/dialogx/msefiledialogx.pas
-  /home/fred/mseide-msegui/lib/common/regcomponents/regfiledialogx.pas
-  /home/fred/mseide-msegui/lib/common/regcomponents/regifirem.pas
-  /home/fred/msefiledialogx/src/msefiledialogresx_mfm.pas
-  /home/fred/msefiledialogx/src/msefiledialogresx.pas
-  /home/fred/msefiledialogx/src/msefiledialogres.pas
-  /home/fred/ideu/src/aboutform.pas
-  /home/fred/ideu/src/finddialogform.pas
-  /home/fred/msefiledialogx/src/main.pas
-  /home/fred/mseuniverse/COPYING
-  /home/fred/Desktop/corona
-  /home/fred/ideu/src/msefiledialog.pas
-  /home/fred/strumpract/src/imagedancer.pas
-  /home/fred/msefiledialog2.pas
-  /home/fred/mseide-msegui/lib/common/dialogs/msefontformatdialog.pas
-  /home/fred/ideu/src/regfiledialogx.pas
-  /home/fred/ideu/src/regcomponents.inc
-  /home/fred/ideu/src/msefiledialogx.pas
  [debuggerfo.project_options]
- value=1
+ value=M
  [debuggerfo.hints]
  value=0
  [sourcefo]
@@ -1271,7 +1241,7 @@ windowlayout=603
  rcy=0
  [sourcefo.files_tab]
  firsttab=0
- index=0
+ index=1
  [confideufo.fontname]
  value=stf_default
  [confideufo.usedefaulteditoroptions]

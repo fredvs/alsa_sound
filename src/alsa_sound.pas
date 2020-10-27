@@ -477,5 +477,8 @@ begin
    if CloseLib then as_unload;  // Unload library if param CloseLib is true
 end;
 
+finalization  // in case if library was not unloaded.
+as_unload;
+
 end.
 
