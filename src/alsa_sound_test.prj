@@ -18,6 +18,8 @@ order15=0
 order16=0
 order17=0
 [projectoptions]
+projectdir=/home/fred/alsa_sound/src
+projectfilename=/home/fred/alsa_sound/src/alsa_sound_test.prj
 options=114
  [projectoptionsfo.toolshortcuts]
  dropdowncolwidths=3
@@ -155,15 +157,17 @@ objpref=-Fo
 targpref=-o
 befcommand=0
 aftcommand=0
-makeoptions=6
+makeoptions=7
  -l -Mobjfpc -Schi
+ -ghl
  -FE.
  -FUunits
  -B
  -O2 -XX -Xs -CX
  -vewnhibq
-makeoptpurpose=6
+makeoptpurpose=7
  Define Object Pascal
+ Debug and memory leak
  Executable in /.
  Output to /units
  Re-Build all
@@ -343,8 +347,9 @@ modulenames=0
 moduletypes=0
 modulefiles=0
 befcommandon=0
-makeoptionson=6
+makeoptionson=7
  4095
+ 1
  4095
  4095
  2
@@ -645,6 +650,7 @@ files=
  a=0,8228,6,Text Files
  )
 [componentstore]
+storedir=/home/fred/mseide-msegui/apps/ide/compstore/
 filename=
 [components]
 [selecteditpage]
@@ -671,9 +677,9 @@ findhistory=7
  uses
 findoptions=1
 editpos=3
- 0,-1073741823
- 0,0
- 0,0
+ 0,6
+ 0,140
+ 0,9
 bookmarks0=0
 bookmarks1=0
 bookmarks2=0
@@ -695,9 +701,9 @@ visiblemodules=0
 nomenumodules=0
 [sourcefo.files_tab]
 firsttab=0
-index=2
+index=0
 [layout]
-windowlayout=573
+windowlayout=554
  [mainfo.basedock]
  splitdir=2
  useroptions=268450944
@@ -1172,11 +1178,11 @@ windowlayout=573
  nx=0
  ny=0
  ncx=1333
- ncy=49
+ ncy=45
  x=0
  y=0
  cx=1333
- cy=47
+ cy=43
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1186,8 +1192,11 @@ windowlayout=573
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
-  [debuggerfo.project_options]
- value=1
+ value=/home/fred/alsa_sound/src/alsa_sound_test.pas
+ history=1
+  /home/fred/alsa_sound/src/alsa_sound_test.pas
+ [debuggerfo.project_options]
+ value=M
  [debuggerfo.hints]
  value=0
  [sourcefo]
@@ -1208,7 +1217,7 @@ windowlayout=573
  rcy=0
  [sourcefo.files_tab]
  firsttab=0
- index=2
+ index=0
  [confideufo.fontname]
  value=stf_default
  [confideufo.usedefaulteditoroptions]

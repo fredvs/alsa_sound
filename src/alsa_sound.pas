@@ -7,6 +7,8 @@
  
  // ALSAglide by Winni.
 
+ // The ALSA types, constants and functions are copied
+ // from the pwm.inc file that is a part of fpAlsa
 
 unit alsa_sound;
 
@@ -78,9 +80,9 @@ function ab_Load: Boolean; // load the lib
 
 procedure ab_Unload();     // unload and frees the lib from memory : do not forget to call it before close application.
 
-function ALSAbeep(frequency, duration, volume: integer; warble: Boolean): Boolean;
+function ALSAbeep(frequency, duration, volume: integer; warble: Boolean; CloseLib : boolean): Boolean;
 
-function ALSAglide(StartFreq,EndFreq, duration, volume: integer): Boolean;
+function ALSAglide(StartFreq,EndFreq, duration, volume: integer; CloseLib : boolean): Boolean;
 
 implementation
 
@@ -135,7 +137,7 @@ begin
   end;
 end;
 
-  function ALSAglide(StartFreq,EndFreq, duration, volume: integer): Boolean;
+  function ALSAglide(StartFreq,EndFreq, duration, volume: integer; CloseLib : boolean): Boolean;
     var
       buffer: array[0..9600 - 1] of byte; // 1/5th second worth of samples @48000Hz
       frames: snd_pcm_sframes_t;   // number of frames written (negative if an error occurred)
@@ -224,10 +226,10 @@ end;
           snd_pcm_drain(pcm);                   // drain any remaining samples
           snd_pcm_close(pcm);
         end;
-      ab_unload;
+        if CloseLib then ab_unload;  // Unload library is param CloseLib is true
     end; //AlsaGlide
   
-function ALSAbeep(frequency, duration, volume: integer; warble: Boolean): Boolean;
+function ALSAbeep(frequency, duration, volume: integer; warble: Boolean; CloseLib : boolean): Boolean;
 var
   buffer: array[0..9600 - 1] of byte;  // 1/5th second worth of samples @48000Hz
   frames: snd_pcm_sframes_t;           // number of frames written (negative if an error occurred)
@@ -317,7 +319,8 @@ begin
       snd_pcm_drain(pcm);              // drain any remaining samples
       snd_pcm_close(pcm);
     end;
-  ab_unload;
+   if CloseLib then ab_unload;  // Unload library is param CloseLib is true
+
 end;
 
 end.
