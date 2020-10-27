@@ -13,5 +13,5 @@ ALSAglide(880, 20, 500, 75, false);
 { function ALSAbeep(Frequency, Duration, Volume: integer; Warble: Boolean; 
   CloseLib: boolean): Boolean; }
 ALSAbeep(880, 100, 75, false, false);   
-ALSAbeep(840, 100, 75, true, true);
+ALSAbeep(840, 100, 75, true, true); // CloseLib = true to close the library
 end.

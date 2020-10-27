@@ -1,14 +1,15 @@
- // Original beeper.inc of
+ // Original ALSAbeep() from beeper.inc by
  // Robert Rozee, 30-April-2020
- // rozee@mail.com
+ // <rozee@mail.com>
 
- // Dynamic loading
- // FredvS fiens@hotmail.com
+ // Turned into unit and dynamic loading by
+ // FredvS <fiens@hotmail.com>
  
  // ALSAglide by Winni.
 
- // The ALSA types, constants and functions are copied
- // from the pwm.inc file that is a part of fpAlsa
+ // The ALSA types, constants and functions
+ // are copied from pwm.inc of fpAlsa by
+ // Nikolay Nikolov <nickysn@users.sourceforge.net>
 
 unit alsa_sound;
 
