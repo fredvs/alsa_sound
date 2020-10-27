@@ -20,9 +20,8 @@ interface
 
 uses
   dynlibs,
-  CTypes,
-  Math;
-
+  CTypes;
+ 
 type
   { Signed frames quantity }
   snd_pcm_sframes_t = cint;
@@ -71,15 +70,15 @@ var
 
 {Special function for dynamic loading of lib ...}
 
-  ab_Handle: TLibHandle = dynlibs.NilHandle; // this will hold our handle for the lib; it functions nicely as a mutli-lib prevention unit as well...
+  as_Handle: TLibHandle = dynlibs.NilHandle; // this will hold our handle for the lib; it functions nicely as a mutli-lib prevention unit as well...
 
   ReferenceCounter: cardinal = 0;  // Reference counter
 
-function ab_IsLoaded: Boolean; inline;
+function as_IsLoaded: Boolean; inline;
 
-function ab_Load: Boolean; // load the lib
+function as_Load: Boolean; // load the lib
 
-procedure ab_Unload();     // unload and frees the lib from memory : do not forget to call it before close application.
+procedure as_Unload();     // unload and frees the lib from memory : do not forget to call it before close application.
 
 function ALSAbeep(frequency, duration, volume: integer; warble: Boolean; CloseLib : boolean): Boolean;
 
@@ -87,43 +86,43 @@ function ALSAglide(StartFreq,EndFreq, duration, volume: integer; CloseLib : bool
 
 implementation
 
-function ab_IsLoaded: Boolean;
+function as_IsLoaded: Boolean;
 begin
-  Result := (ab_Handle <> dynlibs.NilHandle);
+  Result := (as_Handle <> dynlibs.NilHandle);
 end;
 
-function ab_Load: Boolean; // load the lib
+function as_Load: Boolean; // load the lib
 var
   thelib: string = 'libasound.so.2';
 begin
   Result := False;
-  if ab_Handle <> 0 then
+  if as_Handle <> 0 then
   begin
     Inc(ReferenceCounter);
     Result := True; {is it already there ?}
   end
   else
   begin {go & load the library}
-    ab_Handle := DynLibs.SafeLoadLibrary(thelib); // obtain the handle we want
-    if ab_Handle <> DynLibs.NilHandle then
+    as_Handle := DynLibs.SafeLoadLibrary(thelib); // obtain the handle we want
+    if as_Handle <> DynLibs.NilHandle then
     begin {now we tie the functions to the VARs from above}
 
-      Pointer(snd_pcm_open)       := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_open'));
-      Pointer(snd_pcm_set_params) := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_set_params'));
-      Pointer(snd_pcm_writei)     := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_writei'));
-      Pointer(snd_pcm_recover)    := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_recover'));
-      Pointer(snd_pcm_recover)    := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_recover'));
-      Pointer(snd_pcm_drain)      := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_drain'));
-      Pointer(snd_pcm_close)      := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_close'));
+      Pointer(snd_pcm_open)       := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_open'));
+      Pointer(snd_pcm_set_params) := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_set_params'));
+      Pointer(snd_pcm_writei)     := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_writei'));
+      Pointer(snd_pcm_recover)    := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_recover'));
+      Pointer(snd_pcm_recover)    := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_recover'));
+      Pointer(snd_pcm_drain)      := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_drain'));
+      Pointer(snd_pcm_close)      := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_close'));
 
-      Result           := ab_IsLoaded;
+      Result           := as_IsLoaded;
       ReferenceCounter := 1;
     end;
   end;
 
 end;
 
-procedure ab_Unload();
+procedure as_Unload();
 begin
   // < Reference counting
   if ReferenceCounter > 0 then
@@ -131,10 +130,10 @@ begin
   if ReferenceCounter > 0 then
     Exit;
   // >
-  if ab_IsLoaded then
+  if as_IsLoaded then
   begin
-    DynLibs.UnloadLibrary(ab_Handle);
-    ab_Handle := DynLibs.NilHandle;
+    DynLibs.UnloadLibrary(as_Handle);
+    as_Handle := DynLibs.NilHandle;
   end;
 end;
 
@@ -143,7 +142,7 @@ end;
       buffer: array[0..9600 - 1] of byte; // 1/5th second worth of samples @48000Hz
       frames: snd_pcm_sframes_t;   // number of frames written (negative if an error occurred)
       pcm: PPsnd_pcm_t;            // sound device handle
-      I, FC: integer;
+      I, FC, Y: integer;
       SA: array[0..359] of shortint;  // array of sine wave values for a single cycle
     const
       device = 'default' + #0;        // name of sound device
@@ -154,7 +153,7 @@ end;
     begin
       Result := False;
      
-      ab_Load;     // load the library
+      as_Load;     // load the library
      
       if snd_pcm_open(@pcm, @device[1], SND_PCM_STREAM_PLAYBACK, 0) = 0 then
         if snd_pcm_set_params(pcm, SND_PCM_FORMAT_U8,
@@ -165,10 +164,21 @@ end;
           500000) = 0 then    // latency (us)
         begin
           Result := True;
-          StartFreq:= EnsureRange(abs(StartFreq),20,20000);
-          EndFreq  := EnsureRange(abs(EndFreq),20,20000);
-          duration := EnsureRange(abs(duration),50,maxint);// 24.85 days
-          volume   := EnsureRange(abs(Volume),0,100);
+         
+          StartFreq:= abs(StartFreq);
+          EndFreq  := abs(EndFreq);
+          duration := abs(duration);
+          volume   := abs(Volume);
+          
+          if StartFreq < 20 then
+          StartFreq := 20;        // -\
+          if EndFreq < 20 then
+          EndFreq := 20;          // -\
+          if duration < 50 then
+          duration := 50;         //   |-- restrict parameters to usable ranges
+          if volume > 100 then
+          volume   := 100;        // -/
+         
           // 48 samples per ms -->
           // 360 / 48 = 7.5
        
@@ -217,8 +227,11 @@ end;
               Inc(count1);
               Dec(count2);
             end;
-     
-            frames   := snd_pcm_writei(pcm, @buffer, max(2400, FC)); // write AT LEAST one full period
+            
+            if FC <= 2400 then Y := 2400 else Y := FC;
+
+            frames   := snd_pcm_writei(pcm, @buffer, Y); // write AT LEAST one full period
+      
             if frames < 0 then
               frames := snd_pcm_recover(pcm, frames, 0); // try to recover from any error
             if frames < 0 then
@@ -227,7 +240,7 @@ end;
           snd_pcm_drain(pcm);                   // drain any remaining samples
           snd_pcm_close(pcm);
         end;
-        if CloseLib then ab_unload;  // Unload library if param CloseLib is true
+        if CloseLib then as_unload;  // Unload library if param CloseLib is true
     end; //AlsaGlide
   
 function ALSAbeep(frequency, duration, volume: integer; warble: Boolean; CloseLib : boolean): Boolean;
@@ -240,11 +253,11 @@ var
 const
   device = 'default' + #0;             // name of sound device
 var
-  count1, count2, N, X: integer;
+  count1, count2, N, X, Y: integer;
 begin
   Result := False;
 
-  ab_Load;       // load the library
+  as_Load;       // load the library
 
   if snd_pcm_open(@pcm, @device[1], SND_PCM_STREAM_PLAYBACK, 0) = 0 then
     if snd_pcm_set_params(pcm, SND_PCM_FORMAT_U8,
@@ -309,9 +322,12 @@ begin
 
           Inc(count1);
           Dec(count2);
-        end;
+        end; 
+        
+        if FC <= 2400 then Y := 2400 else Y := FC;
 
-        frames   := snd_pcm_writei(pcm, @buffer, max(2400, FC)); // write AT LEAST one full period
+        frames   := snd_pcm_writei(pcm, @buffer, Y); // write AT LEAST one full period
+    
         if frames < 0 then
           frames := snd_pcm_recover(pcm, frames, 0); // try to recover from any error
         if frames < 0 then
@@ -320,7 +336,7 @@ begin
       snd_pcm_drain(pcm);              // drain any remaining samples
       snd_pcm_close(pcm);
     end;
-   if CloseLib then ab_unload;  // Unload library if param CloseLib is true
+   if CloseLib then as_unload;  // Unload library if param CloseLib is true
 end;
 
 end.
