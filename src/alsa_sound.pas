@@ -115,9 +115,9 @@ begin
       Pointer(snd_pcm_drain)      := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_drain'));
       Pointer(snd_pcm_close)      := DynLibs.GetProcedureAddress(ab_Handle, PChar('snd_pcm_close'));
 
+      Result           := ab_IsLoaded;
+      ReferenceCounter := 1;
     end;
-    Result           := ab_IsLoaded;
-    ReferenceCounter := 1;
   end;
 
 end;
@@ -153,7 +153,7 @@ end;
     begin
       Result := False;
      
-      ab_Load;
+      ab_Load;     // load the library
      
       if snd_pcm_open(@pcm, @device[1], SND_PCM_STREAM_PLAYBACK, 0) = 0 then
         if snd_pcm_set_params(pcm, SND_PCM_FORMAT_U8,
@@ -226,7 +226,7 @@ end;
           snd_pcm_drain(pcm);                   // drain any remaining samples
           snd_pcm_close(pcm);
         end;
-        if CloseLib then ab_unload;  // Unload library is param CloseLib is true
+        if CloseLib then ab_unload;  // Unload library if param CloseLib is true
     end; //AlsaGlide
   
 function ALSAbeep(frequency, duration, volume: integer; warble: Boolean; CloseLib : boolean): Boolean;
@@ -243,7 +243,7 @@ var
 begin
   Result := False;
 
-  ab_Load;
+  ab_Load;       // load the library
 
   if snd_pcm_open(@pcm, @device[1], SND_PCM_STREAM_PLAYBACK, 0) = 0 then
     if snd_pcm_set_params(pcm, SND_PCM_FORMAT_U8,
@@ -319,8 +319,7 @@ begin
       snd_pcm_drain(pcm);              // drain any remaining samples
       snd_pcm_close(pcm);
     end;
-   if CloseLib then ab_unload;  // Unload library is param CloseLib is true
-
+   if CloseLib then ab_unload;  // Unload library if param CloseLib is true
 end;
 
 end.

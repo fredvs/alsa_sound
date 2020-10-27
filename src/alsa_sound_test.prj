@@ -677,9 +677,9 @@ findhistory=7
  uses
 findoptions=1
 editpos=3
- 0,6
- 0,140
- 0,9
+ 0,8
+ 0,88
+ 0,-1073741823
 bookmarks0=0
 bookmarks1=0
 bookmarks2=0
@@ -701,7 +701,7 @@ visiblemodules=0
 nomenumodules=0
 [sourcefo.files_tab]
 firsttab=0
-index=0
+index=1
 [layout]
 windowlayout=554
  [mainfo.basedock]
@@ -743,7 +743,7 @@ windowlayout=554
  rcy=0
  wsize=0
  active=0
- visible=1
+ visible=0
  [threadsfo]
  splitdir=0
  useroptions=268451945
@@ -1178,11 +1178,11 @@ windowlayout=554
  nx=0
  ny=0
  ncx=1333
- ncy=45
+ ncy=43
  x=0
  y=0
  cx=1333
- cy=43
+ cy=41
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1192,7 +1192,7 @@ windowlayout=554
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
- value=/home/fred/alsa_sound/src/alsa_sound_test.pas
+ value=/home/fred/alsa_sound/src/alsa_sound.pas
  history=1
   /home/fred/alsa_sound/src/alsa_sound_test.pas
  [debuggerfo.project_options]
@@ -1217,7 +1217,7 @@ windowlayout=554
  rcy=0
  [sourcefo.files_tab]
  firsttab=0
- index=0
+ index=1
  [confideufo.fontname]
  value=stf_default
  [confideufo.usedefaulteditoroptions]
