@@ -686,18 +686,23 @@ findhistory=8
  sort
  uses
 findoptions=1
-editpos=2
+editpos=3
  0,-1073741823
- 0,479
+ 0,347
+ 0,0
 bookmarks0=0
 bookmarks1=0
-sourcefiles=2
+bookmarks2=0
+sourcefiles=3
  ${PROJECTDIR}/alsa_sound_test.pas
  ${PROJECTDIR}/alsa_sound.pas
-relpaths=2
+ ${PROJECTDIR}/alsa_sound_test.pas
+relpaths=3
  alsa_sound_test.pas
  alsa_sound.pas
-ismoduletexts=2
+ alsa_sound_test.pas
+ismoduletexts=3
+ 0
  0
  0
 modules=0
@@ -748,7 +753,7 @@ windowlayout=573
  rcy=0
  wsize=0
  active=0
- visible=0
+ visible=1
  [threadsfo]
  splitdir=0
  useroptions=268451945
@@ -1183,11 +1188,11 @@ windowlayout=573
  nx=0
  ny=0
  ncx=1333
- ncy=27
+ ncy=21
  x=0
  y=0
  cx=1333
- cy=25
+ cy=19
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1197,7 +1202,7 @@ windowlayout=573
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
- value=/home/fred/alsa_sound/src/alsa_sound_test.pas
+ value=/home/fred/alsa_sound/src/alsa_sound.pas
  history=20
   /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/alsa_sound/src/alsa_sound_test.pas
