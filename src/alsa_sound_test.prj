@@ -686,23 +686,18 @@ findhistory=8
  sort
  uses
 findoptions=1
-editpos=3
- 0,-1073741823
- 0,265
- 0,0
+editpos=2
+ 67,6
+ 0,85
 bookmarks0=0
 bookmarks1=0
-bookmarks2=0
-sourcefiles=3
+sourcefiles=2
  ${PROJECTDIR}/alsa_sound_test.pas
  ${PROJECTDIR}/alsa_sound.pas
- ${PROJECTDIR}/alsa_sound_test.pas
-relpaths=3
+relpaths=2
  alsa_sound_test.pas
  alsa_sound.pas
- alsa_sound_test.pas
-ismoduletexts=3
- 0
+ismoduletexts=2
  0
  0
 modules=0
@@ -711,9 +706,9 @@ visiblemodules=0
 nomenumodules=0
 [sourcefo.files_tab]
 firsttab=0
-index=1
+index=0
 [layout]
-windowlayout=555
+windowlayout=603
  [mainfo.basedock]
  splitdir=2
  useroptions=268450944
@@ -1188,11 +1183,11 @@ windowlayout=555
  nx=0
  ny=0
  ncx=1333
- ncy=33
+ ncy=31
  x=0
  y=0
  cx=1333
- cy=31
+ cy=29
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1202,10 +1197,58 @@ windowlayout=555
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
- value=/home/fred/alsa_sound/src/alsa_sound.pas
- history=2
-  /home/fred/alsa_sound/src/alsa_sound.pas
-  /home/fred/alsa_sound/src/alsa_sound_test.pas
+ value=/home/fred/alsa_sound/src/alsa_sound_test.pas
+ history=50
+  /home/fred/alsa_sound_stereo/src/alsa_sound_test.pas
+  /home/fred/alsa_beep/alsa_beep.pas
+  /home/fred/bgrabitmap/bgradefaultbitmap.pas
+  /home/fred/bgrabitmap/bgraanimatedgif.pas
+  /home/fred/strumpract/src/define.inc
+  /home/fred/uos/examples/uos_flat.pas
+  /home/fred/Downloads/lazpaint-dev-lazpaint/lazpaint/umainformlayout.pas
+  /home/fred/strumpract/src/config.pas
+  /home/fred/strumpract/src/guitars.pas
+  /home/fred/strumpract/src/spectrum1.pas
+  /home/fred/ideu/src/define.inc
+  /home/fred/ideu/src/objectinspector.pas
+  /home/fred/mseide-msegui/lib/common/opengl/mseopengl.pas
+  /home/fred/ideu/src/ideusettings.pas
+  /home/fred/strumpract/src/randomnote.pas
+  /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/main.pas
+  /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/opengl.pas
+  /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/openglwidget.pas
+  /home/fred/mseide-msegui/lib/common/kernel/msegui.pas
+  /home/fred/mseide-msegui/apps/ide/main.pas
+  /home/fred/mseide-msegui/lib/common/kernel/mseconsts.pas
+  /home/fred/uos/src/uos.pas
+  /home/fred/uos/src/uos.lpk
+  /home/fred/uos/readme.md
+  /home/fred/ideu/src/componentpaletteform.pas
+  /home/fred/ideu/src/confideu.pas
+  /home/fred/ideu/src/confmsegui.pas
+  /home/fred/ideu/src/conffpgui.pas
+  /home/fred/ideu/src/confdebugger.pas
+  /home/fred/ideu/src/confcompiler.pas
+  /home/fred/ideu/src/dialogfiles.pas
+  /home/fred/ideu/src/aboutform_mfm.pas
+  /home/fred/mseide-msegui/lib/common/dialogx/msefiledialogx.pas
+  /home/fred/mseide-msegui/lib/common/regcomponents/regfiledialogx.pas
+  /home/fred/mseide-msegui/lib/common/regcomponents/regifirem.pas
+  /home/fred/msefiledialogx/src/msefiledialogresx_mfm.pas
+  /home/fred/msefiledialogx/src/msefiledialogresx.pas
+  /home/fred/msefiledialogx/src/msefiledialogres.pas
+  /home/fred/ideu/src/aboutform.pas
+  /home/fred/ideu/src/finddialogform.pas
+  /home/fred/msefiledialogx/src/main.pas
+  /home/fred/mseuniverse/COPYING
+  /home/fred/Desktop/corona
+  /home/fred/ideu/src/msefiledialog.pas
+  /home/fred/strumpract/src/imagedancer.pas
+  /home/fred/msefiledialog2.pas
+  /home/fred/mseide-msegui/lib/common/dialogs/msefontformatdialog.pas
+  /home/fred/ideu/src/regfiledialogx.pas
+  /home/fred/ideu/src/regcomponents.inc
+  /home/fred/ideu/src/msefiledialogx.pas
  [debuggerfo.project_options]
  value=1
  [debuggerfo.hints]
@@ -1228,7 +1271,7 @@ windowlayout=555
  rcy=0
  [sourcefo.files_tab]
  firsttab=0
- index=1
+ index=0
  [confideufo.fontname]
  value=stf_default
  [confideufo.usedefaulteditoroptions]
