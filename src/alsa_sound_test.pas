@@ -26,7 +26,7 @@ begin
 
 { function ALSAbeepStereo(Frequency1, Frequency2, Duration,
   Volume1, Volume2: integer; warble: Boolean; CloseLib : boolean): Boolean; }
-  ALSAbeepStereo(440, 660, 750, 75, 50, False, False);
+  ALSAbeepStereo(440, 660, 750, 75, 50, False, true);  // CloseLib = true to close the library.
 
 end.
 
