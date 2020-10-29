@@ -1,16 +1,19 @@
- // Original ALSAbeep() from beeper.inc by
- // Robert Rozee, 30-April-2020
- // <rozee@mail.com>
-
- // Turned into unit and dynamic loading by
- // FredvS <fiens@hotmail.com>
+// Original ALSAbeep() from beeper.inc by
+// Robert Rozee, 30-April-2020
+// <rozee@mail.com>
  
- // ALSAglide by Winni.
+// The ALSA types, constants and functions
+// are copied from pwm.inc of fpAlsa by
+// Nikolay Nikolov <nickysn@users.sourceforge.net>
 
- // The ALSA types, constants and functions
- // are copied from pwm.inc of fpAlsa by
- // Nikolay Nikolov <nickysn@users.sourceforge.net>
-
+// Turned into unit and dynamic loading by
+// Fred vS <fiens@hotmail.com>
+ 
+// ALSAbeep by Robert Rozee.
+// ALSAglide by Winni.
+// ALSApolice by Winni.
+// ALSAbeepstereo by Fred vS.
+ 
 unit alsa_sound;
 
 {$mode objfpc}{$H+}
@@ -23,38 +26,36 @@ uses
   CTypes;
  
 type
-  { Signed frames quantity }
+  // Signed frames quantity
   snd_pcm_sframes_t = cint;
 
-  { PCM handle }
+  // PCM handle
   PPsnd_pcm_t = ^Psnd_pcm_t;
   Psnd_pcm_t  = Pointer;
 
-  { PCM stream (direction) }
+  // PCM stream (direction) 
   snd_pcm_stream_t = cint;
 
-  { PCM sample format }
+  // PCM sample format
   snd_pcm_format_t = cint;
 
-  { PCM access type }
+  // PCM access type
   snd_pcm_access_t = cint;
 
-  { Unsigned frames quantity }
+  // Unsigned frames quantity
   snd_pcm_uframes_t = cuint;
 
 const
-  { Playback stream }
+  // Playback stream
   SND_PCM_STREAM_PLAYBACK: snd_pcm_stream_t = 0;
 
-  { Unsigned 8 bit }
+  // Unsigned 8 bit
   SND_PCM_FORMAT_U8: snd_pcm_format_t       = 1;
 
-  { snd_pcm_readi/snd_pcm_writei access }
+  // snd_pcm_readi/snd_pcm_writei access
   SND_PCM_ACCESS_RW_INTERLEAVED: snd_pcm_access_t = 3;
-
-  // Dynamic load : Vars that will hold our dynamically loaded functions...
-  // *************************** Alsa Methods *******************************
-
+  
+// Dynamic load : Vars that will hold our dynamically loaded ALSA methods...
 var
   snd_pcm_open: function(pcm: PPsnd_pcm_t; Name: PChar; stream: snd_pcm_stream_t; mode: cint): cint; cdecl;
 
@@ -68,9 +69,8 @@ var
 
   snd_pcm_close: function(pcm: Psnd_pcm_t): cint; cdecl;
 
-{Special function for dynamic loading of lib ...}
-
-  as_Handle: TLibHandle = dynlibs.NilHandle; // this will hold our handle for the lib; it functions nicely as a mutli-lib prevention unit as well...
+// Special function for dynamic loading of lib ...
+  as_Handle: TLibHandle = dynlibs.NilHandle; // this will hold our handle for the lib
 
   ReferenceCounter: cardinal = 0;  // Reference counter
 
@@ -80,18 +80,53 @@ function as_Load: Boolean; // load the lib
 
 procedure as_Unload();     // unload and frees the lib from memory : do not forget to call it before close application.
 
-function ALSAbeep(frequency, duration, volume: integer; warble: Boolean; CloseLib : boolean): Boolean;
+function ALSAbeep(frequency, duration, volume: integer; warble: Boolean; CloseLib: boolean): Boolean;
 
 function ALSAbeep1: Boolean; // fixed beep at 660 HZ, mono, 100 ms, 75 % volume
 function ALSAbeep2: Boolean; // fixed beep at 440 HZ, mono, 100 ms, 75 % volume
 function ALSAbeep3: Boolean; // fixed beep at 220 HZ, mono, 100 ms, 75 % volume
 
-function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: integer; warble: Boolean; CloseLib : boolean): Boolean;
+function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: integer; warble: Boolean; CloseLib: boolean): Boolean;
 
-function ALSAglide(StartFreq,EndFreq, duration, volume: integer; CloseLib : boolean): Boolean;
-
+function ALSAglide(StartFreq,EndFreq, duration, volume: integer; CloseLib: boolean): Boolean;
 
 implementation
+
+function Max(a, b: Integer): Integer; inline;
+begin
+if a > b then
+    Result := a
+  else
+    Result := b;
+end;
+
+function EnsureFreq(const AValue, AMin, AMax: Integer): Integer; inline;
+begin
+  Result:=AValue;
+  If Result<AMin then
+    Result:=AMin;
+  if Result>AMax then
+    Result:=AMax;
+end;
+
+function EnsureSpeed(const AValue: single): single; inline;
+begin
+ result := abs(AValue);
+ if result < 0.1 then result := 0.1
+end;
+
+function EnsureDuration(const AValue: integer): integer; inline;
+begin
+ result := abs(AValue);
+ if result < 50 then result := 50;
+end;
+
+function EnsureVolume(const AValue: integer): integer; inline;
+begin
+ result := abs(AValue);
+ if result < 0 then result := 0
+ else if result > 100 then result := 100;
+end;
 
 function as_IsLoaded: Boolean;
 begin
@@ -103,16 +138,16 @@ var
   thelib: string = 'libasound.so.2';
 begin
   Result := False;
-  if as_Handle <> 0 then
+  if as_Handle <> dynlibs.NilHandle then
   begin
     Inc(ReferenceCounter);
-    Result := True; {is it already there ?}
+    Result := True; // is it already there ?
   end
   else
-  begin {go & load the library}
+  begin // go & load the library
     as_Handle := DynLibs.SafeLoadLibrary(thelib); // obtain the handle we want
     if as_Handle <> DynLibs.NilHandle then
-    begin {now we tie the functions to the VARs from above}
+    begin // now we tie the functions to the VARs from above
 
       Pointer(snd_pcm_open)       := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_open'));
       Pointer(snd_pcm_set_params) := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_set_params'));
@@ -126,7 +161,6 @@ begin
       ReferenceCounter := 1;
     end;
   end;
-
 end;
 
 procedure as_Unload();
@@ -134,7 +168,7 @@ begin
   // < Reference counting
   if ReferenceCounter > 0 then
     Dec(ReferenceCounter);
-  if ReferenceCounter > 0 then
+  if ReferenceCounter < 0 then
     Exit;
   // >
   if as_IsLoaded then
@@ -144,12 +178,12 @@ begin
   end;
 end;
 
-  function ALSAglide(StartFreq,EndFreq, duration, volume: integer; CloseLib : boolean): Boolean;
+function ALSAglide(StartFreq,EndFreq, duration, volume: integer; CloseLib: boolean): Boolean;
     var
       buffer: array[0..9600 - 1] of byte; // 1/5th second worth of samples @48000Hz
       frames: snd_pcm_sframes_t;   // number of frames written (negative if an error occurred)
       pcm: PPsnd_pcm_t;            // sound device handle
-      I, FC, Y: integer;
+      I, FC: integer;
       SA: array[0..359] of shortint;  // array of sine wave values for a single cycle
     const
       device = 'default' + #0;        // name of sound device
@@ -172,20 +206,11 @@ end;
         begin
           Result := True;
          
-          StartFreq:= abs(StartFreq);
-          EndFreq  := abs(EndFreq);
-          duration := abs(duration);
-          volume   := abs(Volume);
-          
-          if StartFreq < 20 then
-          StartFreq := 20;        // -\
-          if EndFreq < 20 then
-          EndFreq := 20;          // -\
-          if duration < 50 then
-          duration := 50;         //   |-- restrict parameters to usable ranges
-          if volume > 100 then
-          volume   := 100;        // -/
-         
+          StartFreq:= EnsureFreq(abs(StartFreq),20,20000);
+          EndFreq  := EnsureFreq(abs(EndFreq),20,20000);
+          duration := EnsureDuration(duration);
+          volume   := EnsureVolume(Volume);
+                       
           // 48 samples per ms -->
           // 360 / 48 = 7.5
        
@@ -235,9 +260,7 @@ end;
               Dec(count2);
             end;
             
-            if FC <= 2400 then Y := 2400 else Y := FC;
-
-            frames   := snd_pcm_writei(pcm, @buffer, Y); // write AT LEAST one full period
+          frames   := snd_pcm_writei(pcm, @buffer, max(2400,FC)); // write AT LEAST one full period
       
             if frames < 0 then
               frames := snd_pcm_recover(pcm, frames, 0); // try to recover from any error
@@ -261,7 +284,7 @@ var
  const
   device = 'default' + #0;             // name of sound device
 var
-  count1, count2, N, X, Y: integer;
+  count1, count2, N, X: integer;
 begin
   Result := False;
 
@@ -276,19 +299,14 @@ begin
       500000) = 0 then            // latency (us)
     begin
       Result := True;
-  
-      frequency := abs(frequency);  // -\
-      duration  := abs(duration);   //   |-- ensure no parameters are negative
-      volume    := abs(volume);     // -/
-      if frequency < 20 then
-        frequency := 20;        // -\
-      if duration < 50 then
-        duration := 50;         //   |-- restrict parameters to usable ranges
-      if volume > 100 then
-        volume   := 100;        // -/
-     
+    
+      frequency:= EnsureFreq(abs(frequency),20,20000);
+      duration := EnsureDuration(duration);
+      volume   := EnsureVolume(Volume);
+             
       for I := 0 to 359 do
         SA[I] := round(sin(pi * I / 180.0) * volume);  // create sine wave pattern
+    
       X       := 0;
       N       := 0;       // up/down counter used by unequal interval division
 
@@ -332,9 +350,7 @@ begin
           Dec(count2);
         end; 
         
-        if FC <= 2400 then Y := 2400 else Y := FC;
-
-        frames   := snd_pcm_writei(pcm, @buffer, Y); // write AT LEAST one full period
+        frames   := snd_pcm_writei(pcm, @buffer, max(2400,FC)); // write AT LEAST one full period
     
         if frames < 0 then
           frames := snd_pcm_recover(pcm, frames, 0); // try to recover from any error
@@ -345,7 +361,7 @@ begin
       snd_pcm_close(pcm);
     end;
    if CloseLib then as_unload;  // Unload library if param CloseLib is true
-end;
+end; // ALSAbeep
 
 function ALSAbeep1: Boolean; // beep at 660 HZ, mono, 100 ms, 75 % volume
 begin
@@ -361,6 +377,7 @@ function ALSAbeep3: Boolean; // beep at 220 HZ, mono, 100 ms, 75 % volume
 begin
 result := ALSAbeep(220, 100, 75, false, true);
 end;
+
 function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: integer; warble: Boolean; CloseLib : boolean): Boolean;
 var
   buffer: array[0..(9600*2) - 1] of byte;  // 1/5th second worth of samples @48000Hz
@@ -371,7 +388,7 @@ var
 const
   device = 'default' + #0;             // name of sound device
 var
-  count1, count2, N, N2, X, X2, Y: integer;
+  count1, count2, N, N2, X, X2: integer;
 begin
   Result := False;
 
@@ -387,23 +404,12 @@ begin
     begin
       Result := True;
   
-      frequency1 := abs(frequency1);  // -\
-      frequency2 := abs(frequency2);
-      duration  := abs(duration);     //   |-- ensure no parameters are negative
-      volume1    := abs(volume1);     
-      volume2    := abs(volume2);     // -/
-      if frequency1 < 20 then
-        frequency1 := 20;        // -\
-      if frequency2 < 20 then
-        frequency2 := 20;        // -  
-      if duration < 50 then
-        duration := 50;         //   |-- restrict parameters to usable ranges
-      if volume1 > 100 then
-        volume1   := 100;        // -/  
-      if volume2 > 100 then
-        volume2   := 100;        // -/  
-  
-
+       frequency1:= EnsureFreq(abs(frequency1),20,20000); 
+      volume1   := EnsureVolume(Volume1);
+        frequency2:= EnsureFreq(abs(frequency2),20,20000); 
+        volume2   := EnsureVolume(Volume2);
+        duration := EnsureDuration(duration);
+      
       for I := 0 to 359 do
         SA[I] := round(sin(pi * I / 180.0) * volume1);  // create sine wave pattern
         
@@ -480,9 +486,7 @@ begin
           inc(I,2);
         end; 
         
-        if FC <= 2400 then Y := 2400 else Y := FC;
-
-        frames   := snd_pcm_writei(pcm, @buffer, Y); // write AT LEAST one full period
+       frames   := snd_pcm_writei(pcm, @buffer,max(2400,FC)); // write AT LEAST one full period
     
         if frames < 0 then
           frames := snd_pcm_recover(pcm, frames, 0); // try to recover from any error
@@ -493,10 +497,9 @@ begin
       snd_pcm_close(pcm);
     end;
    if CloseLib then as_unload;  // Unload library if param CloseLib is true
-end;
+end; // ALSAbeepstereo
 
 finalization  // in case if library was not unloaded.
 as_unload;
 
 end.
-
