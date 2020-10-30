@@ -20,6 +20,59 @@ order17=0
 [projectoptions]
 projectdir=/home/fred/alsa_sound/src
 projectfilename=/home/fred/alsa_sound/src/alsa_sound_test.prj
+findinfiledialog=52
+ [findinfileadialogfo.subdirs]
+ value=1
+ [findinfileadialogfo.incurrentfile]
+ value=0
+ [findinfileadialogfo.inopenfiles]
+ value=0
+ [findinfileadialogfo.wholeword]
+ value=0
+ [findinfileadialogfo.indirectories]
+ value=1
+ [findinfileadialogfo.inprojectdir]
+ value=0
+ [findinfileadialogfo.casesensitive]
+ value=0
+ [findinfileadialogfo.mask]
+ value="*.pas" "*.pp" "*.inc"
+ history=1
+  "*.pas" "*.pp" "*.inc"
+ [findinfileadialogfo.dir]
+ filenamescust=0
+ filenames=1
+  /home/fred/freepascal-ootb_322test/
+ filecolwidth=150
+ x=0
+ y=0
+ cx=0
+ cy=0
+ panel=0
+ noicon=0
+ compact=0
+ showhidden=0
+ colnamewidth=203
+ colsizewidth=81
+ colextwidth=45
+ coldatewidth=126
+ splitterplaces=243
+ splitterlateral=126
+ filehistory=1
+  /home/fred/freepascal-ootb_322test/
+ filefilterindex=0
+ filefilter="*.pas" "*.pp" "*.inc"
+ [findinfileadialogfo.findtext]
+ value=SystemParametersInfo
+ history=2
+  SystemParametersInfo
+  
+ [findinfileadialogfo]
+ stackedunder=
+ x=707
+ y=43
+ cx=234
+ cy=308
 finddialog=8
  [finddialogfo.selectedonly]
  value=0
@@ -675,8 +728,10 @@ envvarons=0
 [edit]
 hintwidth=462
 hintheight=214
-finddtext=ab_
-findhistory=8
+finddtext=integer
+findhistory=10
+ integer
+ single
  ab_
  res=
  30005
@@ -687,8 +742,8 @@ findhistory=8
  uses
 findoptions=1
 editpos=2
- 0,28
- 0,134
+ 0,3
+ 0,0
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
@@ -1183,11 +1238,11 @@ windowlayout=573
  nx=0
  ny=0
  ncx=1333
- ncy=13
+ ncy=5
  x=0
  y=0
  cx=1333
- cy=11
+ cy=3
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1197,10 +1252,10 @@ windowlayout=573
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
- value=/home/fred/alsa_sound/src/alsa_sound_test.pas
+ value=/home/fred/alsa_sound/src/alsa_sound.pas
  history=20
-  /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/alsa_sound/src/alsa_sound_test.pas
+  /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/alsa_sound_stereo/src/alsa_sound_test.pas
   /home/fred/alsa_beep/alsa_beep.pas
   /home/fred/bgrabitmap/bgradefaultbitmap.pas
