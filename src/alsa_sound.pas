@@ -44,6 +44,11 @@ type
 
   // Unsigned frames quantity
   snd_pcm_uframes_t = cuint;
+  
+  timespec =  record
+    tv_sec: cint;
+    tv_nsec: cint;
+  end;  
 
 const
   // Playback stream
@@ -92,6 +97,8 @@ function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint
 function ALSAglide(StartFreq,EndFreq, duration, volume: cint; CloseLib: boolean): Boolean;
 
 function ALSApolice(BaseFreq,duration, volume: cint; speed: cfloat; CloseLib: boolean): Boolean;
+
+function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean;
 
 implementation
 
@@ -187,6 +194,8 @@ begin
     as_Handle := DynLibs.NilHandle;
   end;
 end;
+
+// ALSA methods:
 
 function ALSApolice(BaseFreq,duration,volume: cint; speed: cfloat; CloseLib: boolean): Boolean;
 var
@@ -483,6 +492,11 @@ function ALSAbeep3: Boolean; // beep at 220 HZ, mono, 100 ms, 75 % volume
 begin
 result := ALSAbeep(220, 100, 75, false, true);
 end;
+
+function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean;
+begin
+result := ALSAbeep(20, milliseconds, 0, false, CloseLib);
+end; // ALSAsilence
 
 function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
  warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean;

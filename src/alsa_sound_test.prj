@@ -20,7 +20,7 @@ order17=0
 [projectoptions]
 projectdir=/home/fred/alsa_sound/src
 projectfilename=/home/fred/alsa_sound/src/alsa_sound_test.prj
-findinfiledialog=52
+findinfiledialog=57
  [findinfileadialogfo.subdirs]
  value=1
  [findinfileadialogfo.incurrentfile]
@@ -58,13 +58,18 @@ findinfiledialog=52
  coldatewidth=126
  splitterplaces=243
  splitterlateral=126
- filehistory=1
+ filehistory=2
   /home/fred/freepascal-ootb_322test/
+  /home/fred/uos/
  filefilterindex=0
  filefilter="*.pas" "*.pp" "*.inc"
  [findinfileadialogfo.findtext]
- value=SystemParametersInfo
- history=2
+ value=fpnanosleep
+ history=6
+  fpnanosleep
+  timespec
+  TTimeSpec
+  referencecounter
   SystemParametersInfo
   
  [findinfileadialogfo]
@@ -78,8 +83,8 @@ finddialog=8
  value=0
  [finddialogfo]
  stackedunder=
- x=513
- y=251
+ x=740
+ y=174
  cx=234
  cy=269
 replacedialog=15
@@ -750,8 +755,12 @@ envvarons=0
 [edit]
 hintwidth=462
 hintheight=214
-finddtext=TypeWave
-findhistory=11
+finddtext=fpnanosleep
+findhistory=15
+ fpnanosleep
+ timespec
+ TTimespec
+ sleep(
  TypeWave
  integer
  single
@@ -765,8 +774,8 @@ findhistory=11
  uses
 findoptions=1
 editpos=2
- 39,25
- 0,402
+ 3,5
+ 0,101
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
@@ -901,10 +910,10 @@ windowlayout=573
  ny=0
  ncx=0
  ncy=0
- x=239
- y=115
- cx=678
- cy=414
+ x=0
+ y=29
+ cx=1360
+ cy=710
  rcx=0
  rcy=0
  [projecttreefo]
@@ -1277,9 +1286,9 @@ windowlayout=573
  [debuggerfo.file_history]
  value=/home/fred/alsa_sound/src/alsa_sound_test.pas
  history=20
-  /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/alsa_sound/src/alsa_sound_test.pas
   /home/fred/freepascal-ootb_320test/rtl/unix/sysutils.pp
+  /home/fred/alsa_soundnew/src/alsa_sound.pas
   /home/fred/freepascal-ootb_322test/rtl/objpas/math.pp
   /home/fred/roland/ptcwrapper.pp
   /home/fred/roland/nero5_test.pas
