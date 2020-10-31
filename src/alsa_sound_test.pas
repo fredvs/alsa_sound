@@ -26,23 +26,18 @@ begin
   ALSAbeep(880, 100, 75, False, False);
   ALSAbeep(840, 100, 75, False, False);
 
-// By Winni: Germany ambulace, fire brigade, police 
-// 440 Hz und 585 Hz: a1 - d2  
-   for i := 1 to 3 do
-   begin
-   ALSAbeep(440,400,50,false, False);
-   AlsaBeep(585,400,50,false, False);
-   end;  
+{ function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean; }
+  
+  ALSAsilence(200, false);  
 
-// By Winni: Swiss mountain bus
-// cis'–e–a :   277.183  164.814  220.000
-   for i := 1 to 3 do
-   begin
-   ALSAbeep(277,400,50,false, False);
-   AlsaBeep(165, 400,59,false, False);
-   AlsaBeep(220, 400,50,false, False);
-   ALSAsilence(200, false);
-   end;   
+{function ALSAambulance(CloseLib: boolean): boolean; }
+  ALSAambulance(false);
+  ALSAambulance(false);
+  
+{function ALSAswissbus(CloseLib: boolean): boolean; }
+  ALSAswissbus(false);
+  ALSAswissbus(false);
+  ALSAswissbus(false);
 
 { function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
  warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean; } // WaveType: 0=sine, 1=square, 2=tooth 

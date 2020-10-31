@@ -12,6 +12,8 @@
 // ALSAbeep by Robert Rozee.
 // ALSAglide by Winni.
 // ALSApolice by Winni.
+// ALSAambulance by Winni.
+// ALSAswissbus by Winni.
 // ALSAbeepstereo by Fred vS.
  
 unit alsa_sound;
@@ -94,6 +96,11 @@ function ALSAglide(StartFreq,EndFreq, duration, volume: cint; CloseLib: boolean)
 function ALSApolice(BaseFreq,duration, volume: cint; speed: cfloat; CloseLib: boolean): Boolean;
 
 function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean;
+
+function ALSAambulance(CloseLib: boolean): boolean;
+
+function ALSAswissbus(CloseLib: boolean): boolean;
+
 
 implementation
 
@@ -491,7 +498,25 @@ end;
 function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean;
 begin
 result := ALSAbeep(20, milliseconds, 0, false, CloseLib);
-end; // ALSAsilence
+end;
+
+function ALSAambulance(CloseLib: boolean): boolean;
+// By Winni: Germany ambulace, fire brigade, police 
+// 440 Hz und 585 Hz: a1 - d2  
+begin
+   ALSAbeep(440,400,50,false, False);
+   AlsaBeep(585,400,50,false, CloseLib);
+end;   
+
+function ALSAswissbus(CloseLib: boolean): boolean;
+// By Winni: Swiss mountain bus
+// cis'–e–a :   277.183  164.814  220.000
+begin
+   ALSAbeep(277,400,50,false, False);
+   AlsaBeep(165, 400,59,false, False);
+   AlsaBeep(220, 400,50,false, False);
+   ALSAsilence(200, CloseLib);
+end;    
 
 function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
  warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean;
