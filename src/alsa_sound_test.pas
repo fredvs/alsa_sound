@@ -45,7 +45,7 @@ begin
    end;   
 
 { function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
- warble: Boolean; TypeWave: cint; CloseLib : boolean): Boolean; } // TypeWave: 0=sine, 1=square, 2=tooth 
+ warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean; } // WaveType: 0=sine, 1=square, 2=tooth 
   ALSAbeepStereo(440, 660, 750, 75, 50, False, 0, False);
  
 { function ALSApolice(BaseFreq,duration, volume: integer; speed: single; CloseLib: boolean): Boolean; }

@@ -87,7 +87,7 @@ function ALSAbeep2: Boolean; // fixed beep at 440 HZ, mono, 100 ms, 75 % volume
 function ALSAbeep3: Boolean; // fixed beep at 220 HZ, mono, 100 ms, 75 % volume
 
 function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
- warble: Boolean; TypeWave: cint; CloseLib : boolean): Boolean; // TypeWave: 0=sine, 1=square, 2=tooth 
+ warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean; // WaveType: 0=sine, 1=square, 2=tooth 
 
 function ALSAglide(StartFreq,EndFreq, duration, volume: cint; CloseLib: boolean): Boolean;
 
@@ -485,7 +485,7 @@ result := ALSAbeep(220, 100, 75, false, true);
 end;
 
 function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
- warble: Boolean; TypeWave: cint; CloseLib : boolean): Boolean;
+ warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean;
 var
   buffer: array[0..(9600*2) - 1] of byte;  // 1/5th second worth of samples @48000Hz
   frames: snd_pcm_sframes_t;           // number of frames written (negative if an error occurred)
@@ -516,9 +516,9 @@ begin
         frequency2:= EnsureFreq(abs(frequency2),20,20000); 
         volume2   := EnsureVolume(Volume2);
         duration := EnsureDuration(duration);
-        TypeWave := EnsureWave(TypeWave);
+        WaveType := EnsureWave(WaveType);
         
-      case TypeWave of 
+      case WaveType of 
       0: begin
         for I := 0 to 359 do
         SA[I] := round(sin(pi * I / 180.0) * volume1);  // create sine wave pattern

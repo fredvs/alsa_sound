@@ -82,6 +82,22 @@ finddialog=8
  y=251
  cx=234
  cy=269
+replacedialog=15
+ [replacedialogfo.promptonreplace]
+ value=1
+ [replacedialogfo.selectedonly]
+ value=0
+ [replacedialogfo.replacetext]
+ value=WaveType
+ history=2
+  WaveType
+  
+ [replacedialogfo]
+ stackedunder=
+ x=288
+ y=84
+ cx=254
+ cy=200
 options=114
  [projectoptionsfo.toolshortcuts]
  dropdowncolwidths=3
@@ -734,8 +750,9 @@ envvarons=0
 [edit]
 hintwidth=462
 hintheight=214
-finddtext=integer
-findhistory=10
+finddtext=TypeWave
+findhistory=11
+ TypeWave
  integer
  single
  ab_
@@ -748,8 +765,8 @@ findhistory=10
  uses
 findoptions=1
 editpos=2
- 76,12
- 0,86
+ 0,47
+ 0,520
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
@@ -767,7 +784,7 @@ visiblemodules=0
 nomenumodules=0
 [sourcefo.files_tab]
 firsttab=0
-index=0
+index=1
 [layout]
 windowlayout=573
  [mainfo.basedock]
@@ -1258,8 +1275,9 @@ windowlayout=573
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
- value=/home/fred/alsa_sound/src/alsa_sound_test.pas
+ value=/home/fred/alsa_sound/src/alsa_sound.pas
  history=20
+  /home/fred/alsa_sound/src/alsa_sound_test.pas
   /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/freepascal-ootb_320test/rtl/unix/sysutils.pp
   /home/fred/freepascal-ootb_322test/rtl/objpas/math.pp
@@ -1279,7 +1297,6 @@ windowlayout=573
   /home/fred/alsa_sound_stereo/src/alsa_sound_test.pas
   /home/fred/alsa_beep/alsa_beep.pas
   /home/fred/bgrabitmap/bgradefaultbitmap.pas
-  /home/fred/bgrabitmap/bgraanimatedgif.pas
  [debuggerfo.project_options]
  value=1
  [debuggerfo.hints]
@@ -1302,7 +1319,7 @@ windowlayout=573
  rcy=0
  [sourcefo.files_tab]
  firsttab=0
- index=0
+ index=1
  [confideufo.fontname]
  value=stf_default
  [confideufo.usedefaulteditoroptions]
