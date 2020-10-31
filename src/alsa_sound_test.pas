@@ -3,9 +3,6 @@ program alsa_sound_test;
 uses
  alsa_sound;
   
-var
-i : integer;  
-  
 begin
 { function ALSAbeep1: Boolean; }// beep at 660 HZ, mono, 100 ms, 75 % volume
   ALSAbeep1;
@@ -27,7 +24,6 @@ begin
   ALSAbeep(840, 100, 75, False, False);
 
 { function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean; }
-  
   ALSAsilence(200, false);  
 
 {function ALSAambulance(CloseLib: boolean): boolean; }

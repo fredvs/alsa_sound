@@ -774,7 +774,7 @@ findhistory=15
  uses
 findoptions=1
 editpos=2
- 0,39
+ 0,5
  0,518
 bookmarks0=0
 bookmarks1=0
@@ -835,7 +835,7 @@ windowlayout=573
  rcy=0
  wsize=0
  active=0
- visible=0
+ visible=1
  [threadsfo]
  splitdir=0
  useroptions=268451945
