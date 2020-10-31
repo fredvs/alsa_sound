@@ -206,6 +206,12 @@ settings=8
  wsize=0
  active=1
  visible=1
+colordialog=5
+ [colordialogfo]
+ x=140
+ y=234
+ cx=338
+ cy=298
 mainfile=alsa_sound_test.pas
 targetfile=alsa_sound_test
 messageoutputfile=
@@ -329,10 +335,10 @@ stripmessageesc=0
 copymessages=0
 closemessages=0
 enablepurpose=1
-enablesource=1
+enablesource=0
 checkmethods=1
-colorerror=-1610612712
-colorwarning=-1610612717
+colorerror=-1610612717
+colorwarning=-1610612712
 colornote=-1610612716
 usercolors=30
  0
@@ -742,8 +748,8 @@ findhistory=10
  uses
 findoptions=1
 editpos=2
- 0,3
- 0,0
+ 76,12
+ 0,86
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
@@ -761,7 +767,7 @@ visiblemodules=0
 nomenumodules=0
 [sourcefo.files_tab]
 firsttab=0
-index=1
+index=0
 [layout]
 windowlayout=573
  [mainfo.basedock]
@@ -803,7 +809,7 @@ windowlayout=573
  rcy=0
  wsize=0
  active=0
- visible=0
+ visible=1
  [threadsfo]
  splitdir=0
  useroptions=268451945
@@ -1238,11 +1244,11 @@ windowlayout=573
  nx=0
  ny=0
  ncx=1333
- ncy=5
+ ncy=0
  x=0
  y=0
  cx=1333
- cy=3
+ cy=-2
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1252,30 +1258,30 @@ windowlayout=573
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
- value=/home/fred/alsa_sound/src/alsa_sound.pas
+ value=/home/fred/alsa_sound/src/alsa_sound_test.pas
  history=20
-  /home/fred/alsa_sound/src/alsa_sound_test.pas
   /home/fred/alsa_sound/src/alsa_sound.pas
+  /home/fred/freepascal-ootb_320test/rtl/unix/sysutils.pp
+  /home/fred/freepascal-ootb_322test/rtl/objpas/math.pp
+  /home/fred/roland/ptcwrapper.pp
+  /home/fred/roland/nero5_test.pas
+  /home/fred/roland/ptccrt.pp
+  /home/fred/freepascal-ootb_322/packages/graph/src/ptcgraph/ptccrt.pp
+  /home/fred/roland/fontdata.inc
+  /home/fred/roland/graph.inc
+  /home/fred/roland/graphh.inc
+  /home/fred/freepascal-ootb_322/packages/graph/src/inc/graphh.inc
+  /home/fred/freepascal-ootb_322/packages/graph/src/inc/graph.inc
+  /home/fred/freepascal-ootb_322/packages/graph/src/inc/fontdata.inc
+  /home/fred/freepascal-ootb_322/packages/graph/src/ptcgraph/ptcgraph.pp
+  /home/fred/roland/ptcgraph.pp
+  /home/fred/alsa_sound_stereo/src/alsa_sound.pas
   /home/fred/alsa_sound_stereo/src/alsa_sound_test.pas
   /home/fred/alsa_beep/alsa_beep.pas
   /home/fred/bgrabitmap/bgradefaultbitmap.pas
   /home/fred/bgrabitmap/bgraanimatedgif.pas
-  /home/fred/strumpract/src/define.inc
-  /home/fred/uos/examples/uos_flat.pas
-  /home/fred/Downloads/lazpaint-dev-lazpaint/lazpaint/umainformlayout.pas
-  /home/fred/strumpract/src/config.pas
-  /home/fred/strumpract/src/guitars.pas
-  /home/fred/strumpract/src/spectrum1.pas
-  /home/fred/ideu/src/define.inc
-  /home/fred/ideu/src/objectinspector.pas
-  /home/fred/mseide-msegui/lib/common/opengl/mseopengl.pas
-  /home/fred/ideu/src/ideusettings.pas
-  /home/fred/strumpract/src/randomnote.pas
-  /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/main.pas
-  /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/opengl.pas
-  /home/fred/mseuniverse/attic/msedocumenting/mse/trunk/help/tutorials/widgets/opengl/openglwidget/openglwidget.pas
  [debuggerfo.project_options]
- value=M
+ value=1
  [debuggerfo.hints]
  value=0
  [sourcefo]
@@ -1296,7 +1302,7 @@ windowlayout=573
  rcy=0
  [sourcefo.files_tab]
  firsttab=0
- index=1
+ index=0
  [confideufo.fontname]
  value=stf_default
  [confideufo.usedefaulteditoroptions]

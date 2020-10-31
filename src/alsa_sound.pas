@@ -86,7 +86,8 @@ function ALSAbeep1: Boolean; // fixed beep at 660 HZ, mono, 100 ms, 75 % volume
 function ALSAbeep2: Boolean; // fixed beep at 440 HZ, mono, 100 ms, 75 % volume
 function ALSAbeep3: Boolean; // fixed beep at 220 HZ, mono, 100 ms, 75 % volume
 
-function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint; warble: Boolean; CloseLib: boolean): Boolean;
+function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
+ warble: Boolean; TypeWave: cint; CloseLib : boolean): Boolean; // TypeWave: 0=sine, 1=square, 2=tooth 
 
 function ALSAglide(StartFreq,EndFreq, duration, volume: cint; CloseLib: boolean): Boolean;
 
@@ -125,9 +126,16 @@ end;
 
 function EnsureVolume(const AValue: cint): cint; inline;
 begin
- result := abs(AValue);
+ result := AValue;
  if result < 0 then result := 0
  else if result > 100 then result := 100;
+end;
+
+function EnsureWave(const AValue: cint): cint; inline;
+begin
+ result := AValue;
+ if result < 0 then result := 0
+ else if result > 2 then result := 0;
 end;
 
 function as_IsLoaded: Boolean;
@@ -476,7 +484,8 @@ begin
 result := ALSAbeep(220, 100, 75, false, true);
 end;
 
-function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint; warble: Boolean; CloseLib : boolean): Boolean;
+function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
+ warble: Boolean; TypeWave: cint; CloseLib : boolean): Boolean;
 var
   buffer: array[0..(9600*2) - 1] of byte;  // 1/5th second worth of samples @48000Hz
   frames: snd_pcm_sframes_t;           // number of frames written (negative if an error occurred)
@@ -503,17 +512,38 @@ begin
       Result := True;
   
        frequency1:= EnsureFreq(abs(frequency1),20,20000); 
-      volume1   := EnsureVolume(Volume1);
+        volume1   := EnsureVolume(Volume1);
         frequency2:= EnsureFreq(abs(frequency2),20,20000); 
         volume2   := EnsureVolume(Volume2);
         duration := EnsureDuration(duration);
-      
-      for I := 0 to 359 do
+        TypeWave := EnsureWave(TypeWave);
+        
+      case TypeWave of 
+      0: begin
+        for I := 0 to 359 do
         SA[I] := round(sin(pi * I / 180.0) * volume1);  // create sine wave pattern
         
-      for I := 0 to 359 do
+        for I := 0 to 359 do
         SA2[I] := round(sin(pi * I / 180.0) * volume2);  // create sine wave pattern
-                          
+        end; 
+   
+      1: begin
+       for I := 0 to 359 do
+       if I < 180 then SA[i] := +1*volume1 else  SA[i] := -1* volume1;//  sqare wave
+       
+      for I := 0 to 359 do
+       if I < 180 then SA2[i] := +1*volume2 else  SA2[i] := -1* volume2;//  sqare wave
+       end;
+        
+      2: begin
+      for I := 0 to 359 do
+       SA[i] := (round((360 - i)/180) -1)*volume1;   //   saw tooth wave   
+       
+      for I := 0 to 359 do
+       SA2[i] := (round((360 - i)/180) -1)*volume2;   //   saw tooth wave    
+      end; 
+      
+     end;                    
       X       := 0;
       N       := 0;       // up/down counter used by unequal interval division
                              

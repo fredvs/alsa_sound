@@ -1,8 +1,10 @@
 program alsa_sound_test;
 
 uses
-  alsa_sound;
+ sysutils, alsa_sound;
   
+var
+i : integer;  
   
 begin
 { function ALSAbeep1: Boolean; }// beep at 660 HZ, mono, 100 ms, 75 % volume
@@ -24,10 +26,28 @@ begin
   ALSAbeep(880, 100, 75, False, False);
   ALSAbeep(840, 100, 75, False, False);
 
-{ function ALSAbeepStereo(Frequency1, Frequency2, Duration,
-  Volume1, Volume2: integer; warble: Boolean; CloseLib : boolean): Boolean; }
-  ALSAbeepStereo(440, 660, 750, 75, 50, False, False);
+// By Winni: Germany: ambulace, fire brigade, police 
+// 440 Hz und 585 Hz: a1 - d2  
+   for i := 1 to 3 do
+   begin
+   ALSAbeep(440,400,50,false, False);
+   AlsaBeep(585,400,50,false, False);
+   end;  
 
+// By Winni: swiss mountain bus
+// cis'–e–a :   277.183  164.814  220.000
+   for i := 1 to 3 do
+   begin
+   ALSAbeep(277,400,50,false, False);
+   AlsaBeep(165, 400,59,false, False);
+   AlsaBeep(220, 400,50,false, False);
+   sleep(200);
+   end;   
+
+{ function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
+ warble: Boolean; TypeWave: cint; CloseLib : boolean): Boolean; } // TypeWave: 0=sine, 1=square, 2=tooth 
+  ALSAbeepStereo(440, 660, 750, 75, 50, False, 0, False);
+ 
 { function ALSApolice(BaseFreq,duration, volume: integer; speed: single; CloseLib: boolean): Boolean; }
   ALSApolice(440, 3000, 100, 0.5, True); // CloseLib = true to close the library
 end.
