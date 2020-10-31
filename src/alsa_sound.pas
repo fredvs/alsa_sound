@@ -45,11 +45,6 @@ type
   // Unsigned frames quantity
   snd_pcm_uframes_t = cuint;
   
-  timespec =  record
-    tv_sec: cint;
-    tv_nsec: cint;
-  end;  
-
 const
   // Playback stream
   SND_PCM_STREAM_PLAYBACK: snd_pcm_stream_t = 0;
