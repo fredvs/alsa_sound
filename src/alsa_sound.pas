@@ -103,13 +103,13 @@ if a > b then
     Result := b;
 end;
 
-function EnsureFreq(const AValue, AMin, AMax: cint): cint; inline;
+function EnsureFreq(const AValue: cint): cint; inline;
 begin
-  Result:=AValue;
-  If Result<AMin then
-    Result:=AMin;
-  if Result>AMax then
-    Result:=AMax;
+  Result:=abs(AValue);
+  If Result<20 then
+    Result:=20;
+  if Result>20000 then
+    Result:=20000;
 end;
 
 function EnsureSpeed(const AValue: cfloat): cfloat; inline;
@@ -217,7 +217,7 @@ begin
       500000) = 0 then          // latency (us)
     begin
       Result := True;
-      BaseFreq:= EnsureFreq(abs(BaseFreq),20,20000);
+      BaseFreq:= EnsureFreq(BaseFreq);
       PeakFreq := round (BaseFreq * 4/3); //fourth - most used in signal horns
       speed := EnsureSpeed(speed); // avoid div by zero
       speed := 1/speed *2400;
@@ -312,8 +312,8 @@ function ALSAglide(StartFreq,EndFreq, duration, volume: cint; CloseLib: boolean)
         begin
           Result := True;
          
-          StartFreq:= EnsureFreq(abs(StartFreq),20,20000);
-          EndFreq  := EnsureFreq(abs(EndFreq),20,20000);
+          StartFreq:= EnsureFreq(StartFreq);
+          EndFreq  := EnsureFreq(EndFreq);
           duration := EnsureDuration(duration);
           volume   := EnsureVolume(Volume);
                        
@@ -406,7 +406,7 @@ begin
     begin
       Result := True;
     
-      frequency:= EnsureFreq(abs(frequency),20,20000);
+      frequency:= EnsureFreq(frequency);
       duration := EnsureDuration(duration);
       volume   := EnsureVolume(Volume);
              
@@ -511,9 +511,9 @@ begin
     begin
       Result := True;
   
-       frequency1:= EnsureFreq(abs(frequency1),20,20000); 
+       frequency1:= EnsureFreq(frequency1); 
         volume1   := EnsureVolume(Volume1);
-        frequency2:= EnsureFreq(abs(frequency2),20,20000); 
+        frequency2:= EnsureFreq(frequency2); 
         volume2   := EnsureVolume(Volume2);
         duration := EnsureDuration(duration);
         WaveType := EnsureWave(WaveType);

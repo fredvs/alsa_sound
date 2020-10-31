@@ -765,8 +765,8 @@ findhistory=11
  uses
 findoptions=1
 editpos=2
- 0,47
- 0,520
+ 39,25
+ 0,402
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
@@ -784,7 +784,7 @@ visiblemodules=0
 nomenumodules=0
 [sourcefo.files_tab]
 firsttab=0
-index=1
+index=0
 [layout]
 windowlayout=573
  [mainfo.basedock]
@@ -1275,10 +1275,10 @@ windowlayout=573
  [debuggerfo.edit_compiler]
  value=Pascal
  [debuggerfo.file_history]
- value=/home/fred/alsa_sound/src/alsa_sound.pas
+ value=/home/fred/alsa_sound/src/alsa_sound_test.pas
  history=20
-  /home/fred/alsa_sound/src/alsa_sound_test.pas
   /home/fred/alsa_sound/src/alsa_sound.pas
+  /home/fred/alsa_sound/src/alsa_sound_test.pas
   /home/fred/freepascal-ootb_320test/rtl/unix/sysutils.pp
   /home/fred/freepascal-ootb_322test/rtl/objpas/math.pp
   /home/fred/roland/ptcwrapper.pp
@@ -1319,7 +1319,7 @@ windowlayout=573
  rcy=0
  [sourcefo.files_tab]
  firsttab=0
- index=1
+ index=0
  [confideufo.fontname]
  value=stf_default
  [confideufo.usedefaulteditoroptions]

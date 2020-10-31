@@ -41,7 +41,7 @@ begin
    ALSAbeep(277,400,50,false, False);
    AlsaBeep(165, 400,59,false, False);
    AlsaBeep(220, 400,50,false, False);
-   sleep(200);
+   sleep(100);
    end;   
 
 { function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
