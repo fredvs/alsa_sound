@@ -82,7 +82,8 @@ function as_Load: Boolean; // load the lib
 
 procedure as_Unload();     // unload and frees the lib from memory : do not forget to call it before close application.
 
-function ALSAbeep(frequency, duration, volume: cint; warble: Boolean; CloseLib: boolean): Boolean;
+function ALSAbeep(frequency, duration, volume: cint; warble: Boolean; 
+WaveType: cint; CloseLib : boolean): Boolean; // WaveType: 0=sine, 1=square, 2=tooth 
 
 function ALSAbeep1: Boolean; // fixed beep at 660 HZ, mono, 100 ms, 75 % volume
 function ALSAbeep2: Boolean; // fixed beep at 440 HZ, mono, 100 ms, 75 % volume
@@ -340,6 +341,7 @@ function ALSAglide(StartFreq,EndFreq, duration, volume: cint; CloseLib: boolean)
      
           for I := 0 to 359 do
             SA[I] := round(sin(pi * I / 180.0) * volume); // create sine wave pattern
+    
           X       := 0;
           N       := 0;   // up/down counter used by unequal interval division
      
@@ -395,7 +397,8 @@ function ALSAglide(StartFreq,EndFreq, duration, volume: cint; CloseLib: boolean)
         if CloseLib then as_unload;  // Unload library if param CloseLib is true
     end; //AlsaGlide
   
-function ALSAbeep(frequency, duration, volume: cint; warble: Boolean; CloseLib : boolean): Boolean;
+function ALSAbeep(frequency, duration, volume: cint; warble: Boolean;
+ WaveType: cint; CloseLib : boolean): Boolean;
 var
   buffer: array[0..(9600) - 1] of byte;  // 1/5th second worth of samples @48000Hz
  frames: snd_pcm_sframes_t;           // number of frames written (negative if an error occurred)
@@ -428,6 +431,23 @@ begin
              
       for I := 0 to 359 do
         SA[I] := round(sin(pi * I / 180.0) * volume);  // create sine wave pattern
+        
+         case WaveType of 
+      0: begin
+          for I := 0 to 359 do
+          SA[I] := round(sin(pi * I / 180.0) * volume);  // create sine wave pattern
+         end; 
+   
+      1: begin
+          for I := 0 to 359 do
+          if I < 180 then SA[i] := +1*volume else  SA[i] := -1* volume;//  sqare wave
+         end;
+        
+      2: begin
+          for I := 0 to 359 do
+          SA[i] := (round((360 - i)/180) -1)*volume;   //   saw tooth wave   
+         end; 
+      end;       
     
       X       := 0;
       N       := 0;       // up/down counter used by unequal interval division
@@ -487,22 +507,22 @@ end; // ALSAbeep
 
 function ALSAbeep1: Boolean; // beep at 660 HZ, mono, 100 ms, 75 % volume
 begin
-result := ALSAbeep(660, 100, 75, false, true);
+result := ALSAbeep(660, 100, 75, false, 0, true);
 end;
 
 function ALSAbeep2: Boolean; // beep at 440 HZ, mono, 100 ms, 75 % volume
 begin
-result := ALSAbeep(440, 100, 75, false, true);
+result := ALSAbeep(440, 100, 75, false, 0, true);
 end;
 
 function ALSAbeep3: Boolean; // beep at 220 HZ, mono, 100 ms, 75 % volume
 begin
-result := ALSAbeep(220, 100, 75, false, true);
+result := ALSAbeep(220, 100, 75, false, 0, true);
 end;
 
 function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean;
 begin
-result := ALSAbeep(20, milliseconds, 0, false, CloseLib);
+result := ALSAbeep(20, milliseconds, 0, false, 0, CloseLib);
 end;
 
 function ALSAambulance(loop: integer; CloseLib: boolean): boolean;
@@ -514,8 +534,8 @@ begin
   result := false;
   for x:= 1 to  EnsureLoop(loop) do
    begin
-   ALSAbeep(440,400,50,false, False);
-   result:= AlsaBeep(585,400,50,false, false);
+   ALSAbeep(440,400,50,false, 0, False);
+   result:= AlsaBeep(585,400,50,false, 0, false);
    end;
   if CloseLib then as_unload;
 end;   
@@ -529,9 +549,9 @@ begin
   result := false;
   for x:= 1 to  EnsureLoop(loop) do
    begin
-   ALSAbeep(277,400,50,false, False);
-   AlsaBeep(165, 400,59,false, False);
-   AlsaBeep(220, 400,50,false, False);
+   ALSAbeep(277,400,50,false, 0, False);
+   AlsaBeep(165, 400,59,false, 0, False);
+   AlsaBeep(220, 400,50,false, 0, False);
    result:= ALSAsilence(200, false);
    end;
   if CloseLib then as_unload;
@@ -595,8 +615,8 @@ begin
       for I := 0 to 359 do
        SA2[i] := (round((360 - i)/180) -1)*volume2;   //   saw tooth wave    
       end; 
-      
-     end;                    
+     end;     
+                    
       X       := 0;
       N       := 0;       // up/down counter used by unequal interval division
                              
