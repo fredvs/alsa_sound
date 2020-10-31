@@ -15,31 +15,28 @@ begin
 
 { function ALSAglide(StartFreq, EndFreq, Duration, Volume: integer;
   CloseLib : boolean): Boolean; }
-  ALSAglide(20, 880, 500, 75, False);
-  ALSAglide(880, 20, 500, 75, False);
+  ALSAglide(20, 880, 500, 50, False);
+  ALSAglide(880, 20, 500, 50, False);
 
 { function ALSAbeep(Frequency, Duration, Volume: integer; Warble: Boolean; 
   CloseLib: boolean): Boolean; }
-  ALSAbeep(880, 100, 75, False, False);
-  ALSAbeep(840, 100, 75, False, False);
+  ALSAbeep(880, 100, 50, False, False);
+  ALSAbeep(840, 100, 50, False, False);
 
 { function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean; }
   ALSAsilence(200, false);  
 
-{function ALSAambulance(CloseLib: boolean): boolean; }
-  ALSAambulance(false);
-  ALSAambulance(false);
+{ function ALSAambulance(loop: integer; CloseLib: boolean): boolean; }
+  ALSAambulance(2, false);
   
-{function ALSAswissbus(CloseLib: boolean): boolean; }
-  ALSAswissbus(false);
-  ALSAswissbus(false);
-  ALSAswissbus(false);
-
+{ function ALSAswissbus(loop: integer; CloseLib: boolean): boolean; }
+  ALSAswissbus(3, false);
+ 
 { function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
  warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean; } // WaveType: 0=sine, 1=square, 2=tooth 
-  ALSAbeepStereo(440, 660, 750, 75, 50, False, 0, False);
+  ALSAbeepStereo(440, 660, 1000, 75, 50, False, 0, False);
  
 { function ALSApolice(BaseFreq,duration, volume: integer; speed: single; CloseLib: boolean): Boolean; }
-  ALSApolice(440, 3000, 100, 0.5, True); // CloseLib = true to close the library
+  ALSApolice(440, 3000, 75, 0.5, True); // CloseLib = true to close the library
 end.
 

@@ -97,10 +97,9 @@ function ALSApolice(BaseFreq,duration, volume: cint; speed: cfloat; CloseLib: bo
 
 function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean;
 
-function ALSAambulance(CloseLib: boolean): boolean;
+function ALSAambulance(loop: integer; CloseLib: boolean): boolean;
 
-function ALSAswissbus(CloseLib: boolean): boolean;
-
+function ALSAswissbus(loop: integer; CloseLib: boolean): boolean;
 
 implementation
 
@@ -138,6 +137,12 @@ begin
  result := AValue;
  if result < 0 then result := 0
  else if result > 100 then result := 100;
+end;
+
+function EnsureLoop(const AValue: cint): cint; inline;
+begin
+ result := AValue;
+ if result < 1 then result := 1;
 end;
 
 function EnsureWave(const AValue: cint): cint; inline;
@@ -500,23 +505,37 @@ begin
 result := ALSAbeep(20, milliseconds, 0, false, CloseLib);
 end;
 
-function ALSAambulance(CloseLib: boolean): boolean;
+function ALSAambulance(loop: integer; CloseLib: boolean): boolean;
 // By Winni: Germany ambulace, fire brigade, police 
 // 440 Hz und 585 Hz: a1 - d2  
+var
+x : integer;
 begin
+  result := false;
+  for x:= 1 to  EnsureLoop(loop) do
+   begin
    ALSAbeep(440,400,50,false, False);
-   AlsaBeep(585,400,50,false, CloseLib);
+   result:= AlsaBeep(585,400,50,false, false);
+   end;
+  if CloseLib then as_unload;
 end;   
 
-function ALSAswissbus(CloseLib: boolean): boolean;
+function ALSAswissbus(loop: integer; CloseLib: boolean): boolean;
 // By Winni: Swiss mountain bus
 // cis'–e–a :   277.183  164.814  220.000
+var
+x : integer;
 begin
+  result := false;
+  for x:= 1 to  EnsureLoop(loop) do
+   begin
    ALSAbeep(277,400,50,false, False);
    AlsaBeep(165, 400,59,false, False);
    AlsaBeep(220, 400,50,false, False);
-   ALSAsilence(200, CloseLib);
-end;    
+   result:= ALSAsilence(200, false);
+   end;
+  if CloseLib then as_unload;
+end;   
 
 function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
  warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean;

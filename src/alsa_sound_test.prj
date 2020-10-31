@@ -774,8 +774,8 @@ findhistory=15
  uses
 findoptions=1
 editpos=2
- 0,5
- 0,518
+ 11,31
+ 0,570
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
@@ -1286,8 +1286,8 @@ windowlayout=573
  [debuggerfo.file_history]
  value=/home/fred/alsa_sound/src/alsa_sound_test.pas
  history=20
-  /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/alsa_sound/src/alsa_sound_test.pas
+  /home/fred/alsa_sound/src/alsa_sound.pas
   /home/fred/freepascal-ootb_320test/rtl/unix/sysutils.pp
   /home/fred/alsa_soundnew/src/alsa_sound.pas
   /home/fred/freepascal-ootb_322test/rtl/objpas/math.pp
