@@ -72,7 +72,7 @@ var
 // Special function for dynamic loading of lib ...
   as_Handle: TLibHandle = dynlibs.NilHandle; // this will hold our handle for the lib
 
-  ReferenceCounter: cardinal = 0;  // Reference counter
+  ReferenceCounter: integer = 0;  // Reference counter
 
 function as_IsLoaded: Boolean; inline;
 
