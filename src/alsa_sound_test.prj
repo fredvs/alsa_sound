@@ -775,11 +775,11 @@ findhistory=15
 findoptions=1
 editpos=2
  0,39
- 0,517
+ 0,-1073741823
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
- ${PROJECTDIR}/alsa_sound_test.pas
+ /home/fred/alsa_sound/src/alsa_sound_test.pas
  ${PROJECTDIR}/alsa_sound.pas
 relpaths=2
  alsa_sound_test.pas

@@ -178,7 +178,6 @@ begin
       Pointer(snd_pcm_set_params) := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_set_params'));
       Pointer(snd_pcm_writei)     := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_writei'));
       Pointer(snd_pcm_recover)    := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_recover'));
-      Pointer(snd_pcm_recover)    := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_recover'));
       Pointer(snd_pcm_drain)      := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_drain'));
       Pointer(snd_pcm_close)      := DynLibs.GetProcedureAddress(as_Handle, PChar('snd_pcm_close'));
 
