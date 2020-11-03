@@ -190,7 +190,7 @@ options=114
  value=
  [projectoptionsfo.makegroupbox]
  firsttab=0
- index=2
+ index=3
  [projectoptionsfo.exceptionsgrid]
  propcolwidthref=790
  width0=47
@@ -774,12 +774,12 @@ findhistory=15
  uses
 findoptions=1
 editpos=2
- 0,39
- 0,-1073741823
+ 0,51
+ 0,809
 bookmarks0=0
 bookmarks1=0
 sourcefiles=2
- /home/fred/alsa_sound/src/alsa_sound_test.pas
+ ${PROJECTDIR}/alsa_sound_test.pas
  ${PROJECTDIR}/alsa_sound.pas
 relpaths=2
  alsa_sound_test.pas
@@ -929,7 +929,7 @@ windowlayout=573
  x=0
  y=0
  cx=205
- cy=528
+ cy=527
  rcx=0
  rcy=0
  [projecttreefo.grid]
@@ -1124,7 +1124,7 @@ windowlayout=573
  ncy=0
  x=0
  y=583
- cx=1348
+ cx=1356
  cy=106
  rcx=0
  rcy=0
@@ -1257,8 +1257,8 @@ windowlayout=573
  ncy=0
  x=0
  y=0
- cx=1348
- cy=49
+ cx=1356
+ cy=50
  rcx=0
  rcy=0
  [debuggerfo.basedock]
@@ -1269,12 +1269,12 @@ windowlayout=573
  mdistate=0
  nx=0
  ny=0
- ncx=1333
+ ncx=1341
  ncy=0
  x=0
  y=0
- cx=1333
- cy=-2
+ cx=1356
+ cy=0
  rcx=0
  rcy=0
  [debuggerfo.edit_options]
@@ -1286,8 +1286,8 @@ windowlayout=573
  [debuggerfo.file_history]
  value=/home/fred/alsa_sound/src/alsa_sound_test.pas
  history=20
-  /home/fred/alsa_sound/src/alsa_sound_test.pas
   /home/fred/alsa_sound/src/alsa_sound.pas
+  /home/fred/alsa_sound/src/alsa_sound_test.pas
   /home/fred/freepascal-ootb_320test/rtl/unix/sysutils.pp
   /home/fred/alsa_soundnew/src/alsa_sound.pas
   /home/fred/freepascal-ootb_322test/rtl/objpas/math.pp
@@ -1322,8 +1322,8 @@ windowlayout=573
  ncy=0
  x=208
  y=0
- cx=1140
- cy=528
+ cx=1148
+ cy=527
  rcx=0
  rcy=0
  [sourcefo.files_tab]
@@ -1364,9 +1364,9 @@ windowlayout=573
  ncx=0
  ncy=0
  x=0
- y=52
- cx=1348
- cy=528
+ y=53
+ cx=1356
+ cy=527
  rcx=0
  rcy=0
 [targetconsole]

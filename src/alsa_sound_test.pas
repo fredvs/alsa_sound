@@ -22,21 +22,30 @@ begin
   WaveType: cint; CloseLib: boolean): Boolean; } // WaveType: 0=sine, 1=square, 2=tooth
   ALSAbeep(880, 100, 50, False, 0, False);
   ALSAbeep(840, 100, 50, False, 0, False);
-
+  
+{ function ALSAbeepflange(Frequency, Duration, Volume: integer; Warble: Boolean; 
+  WaveType: cint; CloseLib: boolean): Boolean; } // WaveType: 0=sine, 1=square, 2=tooth
+  ALSAbeepflanger(880, 500, 50, False, 0, False);
+  ALSAbeepflanger(840, 100, 50, False, 0, False);
+ 
 { function ALSAsilence(milliseconds: Cardinal;  CloseLib: boolean): boolean; }
   ALSAsilence(200, false);  
 
 { function ALSAambulance(loop: integer; CloseLib: boolean): boolean; }
-  ALSAambulance(2, false);
+  ALSAambulance(2, 50, false);
   
 { function ALSAswissbus(loop: integer; CloseLib: boolean): boolean; }
-  ALSAswissbus(2, false);
+  ALSAswissbus(2, 50, false);
  
 { function ALSAbeepStereo(Frequency1, Frequency2, Duration, Volume1, Volume2: cint;
  warble: Boolean; WaveType: cint; CloseLib : boolean): Boolean; } // WaveType: 0=sine, 1=square, 2=tooth 
   ALSAbeepStereo(440, 660, 1000, 75, 50, False, 0, False);
+  
+{ function ALSAmexicantruck(Loop, Volume: Integer; CloseLib: boolean): boolean; }
+  ALSAmexicantruck(2, 30, false);
  
 { function ALSApolice(BaseFreq,duration, volume: integer; speed: single; CloseLib: boolean): Boolean; }
-  ALSApolice(440, 2000, 75, 0.5, True); // CloseLib = true to close the library
+  ALSApolice(440, 2000, 30, 0.5, True); // CloseLib = true to close the library
+
 end.
 
